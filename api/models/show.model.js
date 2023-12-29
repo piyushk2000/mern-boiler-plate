@@ -45,31 +45,20 @@ import mongoose from 'mongoose';
 // );
 
 const userShowSchema = new mongoose.Schema({
-  user: {
+  userId: {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'User',
     required: true,
   },
-  show: {
-    type: mongoose.Schema.Types.ObjectId,
+  showId: {
+    type: Number,
     ref: 'Show',
     required: true,
   },
-  watched: {
-    type: Boolean,
-    default: false,
-  },
-  toWatch: {
-    type: Boolean,
-    default: false,
-  },
-  dropped: {
-    type: Boolean,
-    default: false,
-  },
-  watching: {
-    type: Boolean,
-    default: false,
+  status: {
+    type: String,
+    enum: ['watched', 'toWatch', 'dropped', 'watching'],
+    default: 'toWatch',
   },
   episode: {
     type: Number,

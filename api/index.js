@@ -3,8 +3,11 @@ import mongoose from 'mongoose';
 import dotenv from 'dotenv';
 import userRoutes from './routes/user.route.js';
 import authRoutes from './routes/auth.route.js';
+import showRoutes from './routes/show.route.js';
 import cookieParser from 'cookie-parser';
 import path from 'path';
+
+
 dotenv.config();
 
 mongoose
@@ -22,9 +25,6 @@ const app = express();
 
 app.use(express.static(path.join(__dirname, '/client/dist')));
 
-app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname, 'client', 'dist', 'index.html'));
-});
 
 app.use(express.json());
 
@@ -36,6 +36,7 @@ app.listen(3000, () => {
 
 app.use('/api/user', userRoutes);
 app.use('/api/auth', authRoutes);
+app.use('/api/userShow', showRoutes);
 
 app.use((err, req, res, next) => {
   const statusCode = err.statusCode || 500;
@@ -46,3 +47,8 @@ app.use((err, req, res, next) => {
     statusCode,
   });
 });
+
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, 'client', 'dist', 'index.html'));
+});
+

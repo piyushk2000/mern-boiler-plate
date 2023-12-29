@@ -32,7 +32,7 @@ const Card1 = ({ anime }) => {
 
   return (
     <div style={{ marginLeft: 10, padding: 5 }} onClick={handleCardClick}>
-      <Card sx={{ maxWidth: 345, maxHeight: 400, p: 1, m: 2, minHeight: 400 }}>
+      <Card sx={{ maxWidth: 345, maxHeight: 300, p: 1, m: 2, minHeight: 300 }}>
         <CardHeader
           action={
             <IconButton aria-label="settings">
@@ -54,33 +54,7 @@ const Card1 = ({ anime }) => {
           alt={anime.name}
         />
         <CardActions disableSpacing>
-          <IconButton aria-label="add to favorites">
-            <FavoriteIcon />
-          </IconButton>
-          <IconButton aria-label="share">
-            <ShareIcon />
-          </IconButton>
-          <Box component="fieldset" borderColor="transparent" sx={{ marginLeft: 'auto', marginTop: 2 }}>
-            <Typography component="legend" sx={{ mb: 0 }}>Rating:</Typography>
-            <Rating name="read-only" value={anime.rating || 0} readOnly />
-          </Box>
-          <Accordion expanded={expanded} onChange={handleExpandClick}>
-            <AccordionSummary
-              expandIcon={<ExpandMoreIcon />}
-              aria-controls="panel1bh-content"
-              id="panel1bh-header"
-            >
-              <Typography>Add to Watchlist</Typography>
-            </AccordionSummary>
-            <AccordionDetails>
-              {/* Additional options or content go here */}
-              <Typography variant="body2" color="text.secondary">
-                Details or additional options can be added here.
-              </Typography>
-              {/* Call API on button click */}
-              <button onClick={handleAddToWatchlist}>Add to Watchlist</button>
-            </AccordionDetails>
-          </Accordion>
+
         </CardActions>
       </Card>
     </div>
