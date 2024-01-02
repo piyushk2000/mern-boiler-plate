@@ -6,6 +6,7 @@ import authRoutes from './routes/auth.route.js';
 import showRoutes from './routes/show.route.js';
 import cookieParser from 'cookie-parser';
 import path from 'path';
+import cors from 'cors';
 
 
 dotenv.config();
@@ -22,6 +23,10 @@ mongoose
 const __dirname = path.resolve();
 
 const app = express();
+
+app.use(cors({
+  origin: '*',
+}));
 
 app.use(express.static(path.join(__dirname, '/client/dist')));
 

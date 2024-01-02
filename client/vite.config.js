@@ -6,7 +6,7 @@ export default defineConfig({
   server: {
     proxy: {
       '/api': {
-        target: 'https://vercel.com/piyushk2000/vibe-vault-backend',
+        target: 'https://vibe-vault-backend-piyushk2000.vercel.app/',
         secure: false,
       },
     },
