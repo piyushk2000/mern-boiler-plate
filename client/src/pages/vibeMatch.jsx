@@ -36,7 +36,7 @@ function TinderCards() {
   useEffect(() => {
     const fetchrecommendations = async () => {
       try {
-        const recommendations = await axios.get(`http://localhost:8000/recommendations/${currentUser._id}`);
+        const recommendations = await axios.get(`https://vibe-vault-fast.vercel.app/recommendations/${currentUser._id}`);
         setPeople(recommendations.data)
         console.log(recommendations.data)
 
