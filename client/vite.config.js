@@ -5,8 +5,8 @@ import react from '@vitejs/plugin-react-swc';
 export default defineConfig({
   server: {
     proxy: {
-      '/api': {
-        target: 'https://vibe-vault-9675.vercel.app',
+      'https://vibe-vault-backend-git-main-piyushk2000.vercel.app/api': {
+        target: 'https://vibe-vault-backend-git-main-piyushk2000.vercel.app/',
         secure: true,
       },
     },

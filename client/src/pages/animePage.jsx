@@ -54,7 +54,7 @@ const AnimeDetails = () => {
         favorite: userShowDetails.favorite,
         rating: userShowDetails.rating,
       })
-      await axios.post('/api/userShow/user/shows', {
+      await axios.post('https://vibe-vault-backend-git-main-piyushk2000.vercel.app/api/userShow/user/shows', {
         userId: currentUser._id,
         showId: id,
         showName:animeDetails.name , 
@@ -74,7 +74,7 @@ const AnimeDetails = () => {
   useEffect(() => {
     const fetchAnimeDetails = async () => {
       try {
-        const response = await axios.get(`https://shikimori.one/api/animes/${id}`);
+        const response = await axios.get(`https://shikimori.onehttps://vibe-vault-backend-git-main-piyushk2000.vercel.app/api/animes/${id}`);
         const animeData = response.data
         setAnimeDetails(animeData);
         
@@ -86,7 +86,7 @@ const AnimeDetails = () => {
     const fetchUserShowDetails = async () => {
       // Call the API to get user's relationship details with the show
       try {
-        const response = await axios.get(`/api/userShow/user/${currentUser._id}/show/${id}`);
+        const response = await axios.get(`https://vibe-vault-backend-git-main-piyushk2000.vercel.app/api/userShow/user/${currentUser._id}/show/${id}`);
         setUserShowDetails(response.data || {});
       } catch (error) {
         console.error('Error fetching user show details:', error);

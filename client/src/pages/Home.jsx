@@ -26,7 +26,7 @@ const Home = () => {
 
   const fetchData = async () => {
     try {
-      const response = await axios.get(`https://shikimori.one/api/animes`, {
+      const response = await axios.get(`https://shikimori.onehttps://vibe-vault-backend-git-main-piyushk2000.vercel.app/api/animes`, {
         params: {
           page: currentPage,
           limit: itemsPerPage,
