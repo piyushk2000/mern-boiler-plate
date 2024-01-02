@@ -77,7 +77,7 @@ const AnimeDetails = () => {
         const response = await axios.get(`https://shikimori.one/api/animes/${id}`);
         const animeData = response.data
         setAnimeDetails(animeData);
-        // console.log(animeData)
+        
       } catch (error) {
         console.error('Error fetching anime details:', error);
       }

@@ -5,7 +5,11 @@ export default {
     "./src/**/*.{js,ts,jsx,tsx}",
   ],
   theme: {
-    extend: {},
+    extend: {
+      textShadow: {
+        'black-outline': '0 0 3px black',
+      }
+    },
   },
   plugins: [],
 }
