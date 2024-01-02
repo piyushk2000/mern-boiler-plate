@@ -23,6 +23,7 @@ const AnimeDetails = () => {
   const [userShowDetails, setUserShowDetails] = useState({});
   const dispatch = useDispatch();
   const { currentUser, loading, error } = useSelector((state) => state.user);
+  const [genreIdList , setgenreIdList] = useState([])
 
   // Assuming you have Redux actions to update user details
   const updateUserShowDetails = (field, value) => {
@@ -32,6 +33,13 @@ const AnimeDetails = () => {
     }));
   };
 
+  useEffect(()=>{
+    if(animeDetails){
+          const genreids = animeDetails.genres.map(genre => genre.name)
+          setgenreIdList(genreids)
+    }
+  },[animeDetails])
+
   const saveUserShowDetails = async () => {
     // Call the API to save user's relationship with the show
     try {
@@ -39,6 +47,8 @@ const AnimeDetails = () => {
       console.log({
         userId: currentUser._id,
         showId: id,
+        showName:animeDetails.name , 
+        showGenres: genreIdList ,
         status: userShowDetails.status,
         episode: userShowDetails.episode,
         favorite: userShowDetails.favorite,
@@ -47,6 +57,8 @@ const AnimeDetails = () => {
       await axios.post('/api/userShow/user/shows', {
         userId: currentUser._id,
         showId: id,
+        showName:animeDetails.name , 
+        showGenres: genreIdList ,
         status: userShowDetails.status,
         episode: userShowDetails.episode,
         favorite: userShowDetails.favorite,
@@ -63,7 +75,9 @@ const AnimeDetails = () => {
     const fetchAnimeDetails = async () => {
       try {
         const response = await axios.get(`https://shikimori.one/api/animes/${id}`);
-        setAnimeDetails(response.data);
+        const animeData = response.data
+        setAnimeDetails(animeData);
+        // console.log(animeData)
       } catch (error) {
         console.error('Error fetching anime details:', error);
       }

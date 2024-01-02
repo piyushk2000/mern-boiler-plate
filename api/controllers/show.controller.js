@@ -31,7 +31,7 @@ const getAllUserShowsId = async (req, res) => {
 
 // Add a user's relationship with a show
 const addUserShow = async (req, res) => {
-  const { userId, showId, status, episode, favorite, rating } = req.body;
+  const { userId, showId, showName, showGenres , status, episode, favorite, rating } = req.body;
 
   try {
     const existingUserShow = await UserShow.findOne({ userId, showId });
@@ -47,7 +47,7 @@ const addUserShow = async (req, res) => {
       res.json(existingUserShow);
     } else {
       // If no relationship exists, create a new one
-      const newUserShow = new UserShow({ userId, showId, status, episode, favorite, rating });
+      const newUserShow = new UserShow({ userId, showId, showName, showGenres , status, episode, favorite, rating });
       await newUserShow.save();
       res.status(201).json(newUserShow);
     }

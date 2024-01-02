@@ -52,8 +52,15 @@ const userShowSchema = new mongoose.Schema({
   },
   showId: {
     type: Number,
-    ref: 'Show',
     required: true,
+  },
+  showName: {
+    type: String,
+    required: false,
+  },
+  showGenres: {
+    type: [String],
+    required: false,
   },
   status: {
     type: String,
