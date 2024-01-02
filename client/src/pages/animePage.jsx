@@ -74,7 +74,7 @@ const AnimeDetails = () => {
   useEffect(() => {
     const fetchAnimeDetails = async () => {
       try {
-        const response = await axios.get(`https://shikimori.onehttps://vibe-vault-backend-git-main-piyushk2000.vercel.app/api/animes/${id}`);
+        const response = await axios.get(`https://shikimori.one/api/animes/${id}`);
         const animeData = response.data
         setAnimeDetails(animeData);
         
