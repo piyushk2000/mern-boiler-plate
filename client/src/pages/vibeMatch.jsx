@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
 import TinderCard from "react-tinder-card";
-import "./tinderCard.css"
+import "./tinderCard.css";
 import { useSelector } from 'react-redux';
-import axios from 'axios'
+import axios from 'axios';
 import styled from '@emotion/styled';
 import CircularProgress from '@mui/material/CircularProgress';
 
@@ -16,11 +16,8 @@ const StyledContainer = styled.div`
 const StyledUsername = styled.h3`
   color: black;
 `;
+
 function TinderCards() {
-
-
-
-
   const [peoples, setPeople] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const { currentUser, loading, error } = useSelector((state) => state.user);
@@ -31,9 +28,9 @@ function TinderCards() {
       try {
         const recommendations = await axios.get(`https://fast-api-copy.vercel.app/recommendations/${currentUser._id}`);
         setPeople(recommendations.data);
-        setIsLoading(false);
       } catch (error) {
         console.error('Error fetching recommendations:', error);
+      } finally {
         setIsLoading(false);
       }
     };
@@ -41,25 +38,33 @@ function TinderCards() {
     fetchrecommendations();
   }, [currentUser._id]);
 
-
   const swiped = (direction, nameToDelete) => {
     console.log(`i'm in swiped`, nameToDelete);
-    // setLastDirection(direction);
-  }
+  };
 
   const outOfFrame = (username) => {
     console.log(`enough tinder today`);
-
-  }
+  };
 
   if (isLoading) {
-    return <div className="flex justify-center items-center h-screen">
-             <CircularProgress />
-           </div>;
+    return (
+      <div className="flex justify-center items-center h-screen">
+        <CircularProgress />
+      </div>
+    );
   }
+
+  if (peoples.length === 0) {
+    return (
+      <div className="flex justify-center items-center h-screen">
+        <p>No matches found, please add more shows to get matches</p>
+      </div>
+    );
+  }
+
   return (
     <div className="tinderCard_container">
-      {peoples.map((person, index) =>
+      {peoples.map((person, index) => (
         <TinderCard
           key={index}
           className="swipe"
@@ -68,17 +73,13 @@ function TinderCards() {
           onCardLeftScreen={() => outOfFrame(person.username)}
         >
           <div className="card"
-            style={{
-              backgroundImage: "url(" + person.profilePicture + ")"
-            }}>
+            style={{ backgroundImage: "url(" + person.profilePicture + ")" }}>
             <h3 style={{ color: 'white', textShadow: '0 0 8px black' }}>{person.username}</h3>
-
           </div>
-
         </TinderCard>
-      )}
-
+      ))}
     </div>
-  )
+  );
 }
+
 export default TinderCards;
