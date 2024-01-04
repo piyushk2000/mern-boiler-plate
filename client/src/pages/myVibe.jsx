@@ -58,6 +58,7 @@ const MyVibe = () => {
       try {
         const response = await axios.get(`https://shikimori.one/api/animes/?ids=[${showIds}]&&page=1&&limit=10`);
         setAnimeData(response.data);
+        console.log(response.data)
       } catch (error) {
         console.error('Error fetching anime data:', error);
       }

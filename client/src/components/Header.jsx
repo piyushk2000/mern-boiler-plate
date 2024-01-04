@@ -1,36 +1,57 @@
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useSelector } from 'react-redux';
+import { AppBar, Toolbar, IconButton, Drawer, List, ListItem, ListItemText, Hidden } from '@mui/material';
+import MenuIcon from '@mui/icons-material/Menu';
 
 export default function Header() {
   const { currentUser } = useSelector((state) => state.user);
+  const [drawerOpen, setDrawerOpen] = useState(false);
+
+  const toggleDrawer = (open) => (event) => {
+    if (event.type === 'keydown' && ( event.key === 'Shift')) {
+      return;
+    }
+    setDrawerOpen(open);
+  };
+
+  const menuItems = [
+    { text: 'Vibe Vault', link: '/' },
+    { text: 'My Vibe', link: '/myvibe' },
+    { text: 'Vibe Match', link: '/vibematch' },
+    { text: 'Profile', link: '/profile' },
+  ];
+
   return (
-    <div className='bg-slate-200'>
-      <div className='flex justify-between items-left max-w-6xl mx-auto p-3'>
-        <Link to='/'>
-          <h1 className='font-bold -ml-10'>Vibe vault</h1>
-        </Link>
-        <Link to='/myvibe'>
-          <h1 className='font-bold -ml-60'>My Vibe</h1>
-        </Link>
-        <Link to='/vibematch'>
-          <h1 className='font-bold -ml-60'>Vibe Match</h1>
-        </Link>
-        <ul className='flex gap-4'>
-          {/* <Link to='/'>
-            <li>Vibe</li>
-          </Link> */}
-          {/* <Link to='/vibematch'>
-            <li>Vibe Match</li>
-          </Link> */}
-          <Link to='/profile'>
-            {currentUser ? (
-              <img src={currentUser.profilePicture} alt='profile' className='h-7 w-7 rounded-full object-cover' />
-            ) : (
-              <li>Sign In</li>
-            )}
-          </Link>
-        </ul>
-      </div>
-    </div>
+    <AppBar position="static" color="default" className="bg-slate-200">
+      <Toolbar className='max-w-6xl mx-auto'>
+        <Hidden smUp>
+          <IconButton edge="start" color="inherit" aria-label="menu" onClick={toggleDrawer(true)}>
+            <MenuIcon />
+          </IconButton>
+        </Hidden>
+        <Drawer anchor="left" open={drawerOpen} onClose={toggleDrawer(false)}>
+          <List>
+            {menuItems.map((item, index) => (
+              <ListItem button key={index} component={Link} to={item.link} onClick={toggleDrawer(false)}>
+                <ListItemText primary={item.text} />
+              </ListItem>
+            ))}
+          </List>
+        </Drawer>
+        <Hidden smDown>
+          <div>
+            {menuItems.map((item, index) => (
+              <Link key={index} to={item.link} style={{ marginRight: '20px' }}>{item.text}</Link>
+            ))}
+          </div>
+        </Hidden>
+        {currentUser ? (
+          <img src={currentUser.profilePicture} alt='profile' className='h-7 w-7 rounded-full object-cover' />
+        ) : (
+          <Link to='/profile'>Sign In</Link>
+        )}
+      </Toolbar>
+    </AppBar>
   );
 }
