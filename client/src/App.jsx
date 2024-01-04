@@ -8,6 +8,7 @@ import Header from './components/Header';
 import PrivateRoute from './components/PrivateRoute';
 import AnimeDetails from './pages/animePage';
 import VibeMatch from './pages/vibeMatch';
+import MyVibe from './pages/myVibe';
 
 export default function App() {
   return (
@@ -21,6 +22,7 @@ export default function App() {
         <Route path='/sign-up' element={<SignUp />} />
         <Route path="/anime/:id" element={<AnimeDetails />} />
         <Route path="/vibematch" element={<VibeMatch />} />
+        <Route path="/myvibe" element={<MyVibe />} />
         <Route element={<PrivateRoute />}>
           <Route path='/profile' element={<Profile />} />
         </Route>

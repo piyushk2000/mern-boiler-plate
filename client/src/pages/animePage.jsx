@@ -43,17 +43,8 @@ const AnimeDetails = () => {
   const saveUserShowDetails = async () => {
     // Call the API to save user's relationship with the show
     try {
-      alert('Done')
-      console.log({
-        userId: currentUser._id,
-        showId: id,
-        showName:animeDetails.name , 
-        showGenres: genreIdList ,
-        status: userShowDetails.status,
-        episode: userShowDetails.episode,
-        favorite: userShowDetails.favorite,
-        rating: userShowDetails.rating,
-      })
+      alert('Updated')
+      
       await axios.post('https://vibe-vault-backend-git-main-piyushk2000.vercel.app/api/userShow/user/shows', {
         userId: currentUser._id,
         showId: id,

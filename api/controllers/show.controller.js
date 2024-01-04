@@ -3,26 +3,35 @@ import { UserShow } from '../models/show.model.js';
 
 // Controller functions
 
-// Get all shows added by a specific user
+// Get all shows added by a specific user with optional filters
 const getAllUserShows = async (req, res) => {
   const { userId } = req.params;
+  const { status, favorite } = req.query;
+
+  let filter = { userId };
+  if (status) filter.status = status;
+  if (favorite !== undefined) filter.favorite = favorite === 'true';
 
   try {
-    const userShows = await UserShow.find({ userId });
-    // console.log('working')
+    const userShows = await UserShow.find(filter);
     res.json(userShows);
   } catch (error) {
     res.status(500).json({ error: 'Internal Server Error' });
   }
 };
 
-// Get all showIds added by a specific user
+// Get all showIds added by a specific user with optional filters
 const getAllUserShowsId = async (req, res) => {
   const { userId } = req.params;
+  const { status, favorite } = req.query;
+
+  let filter = { userId };
+  if (status) filter.status = status;
+  if (favorite !== undefined) filter.favorite = favorite === 'true';
 
   try {
-    const userShows = await UserShow.find({ userId }, 'showId');
-    const showIds = userShows.map(userShow => userShow.showId.toString()); // Convert showId to string
+    const userShows = await UserShow.find(filter, 'showId');
+    const showIds = userShows.map(userShow => userShow.showId.toString());
     res.json(showIds);
   } catch (error) {
     res.status(500).json({ error: 'Internal Server Error' });
@@ -37,10 +46,10 @@ const addUserShow = async (req, res) => {
     const existingUserShow = await UserShow.findOne({ userId, showId });
 
     if (existingUserShow) {
-      // If the user already has a relationship with the show, update the details
+      
       existingUserShow.status = status || existingUserShow.status;
       existingUserShow.episode = episode || existingUserShow.episode;
-      existingUserShow.favorite = favorite || existingUserShow.favorite;
+      existingUserShow.favorite = favorite !== undefined ? favorite : existingUserShow.favorite;
       existingUserShow.rating = rating || existingUserShow.rating;
 
       await existingUserShow.save();

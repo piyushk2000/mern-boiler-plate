@@ -9,6 +9,9 @@ export default function Header() {
         <Link to='/'>
           <h1 className='font-bold -ml-10'>Vibe vault</h1>
         </Link>
+        <Link to='/myvibe'>
+          <h1 className='font-bold -ml-60'>My Vibe</h1>
+        </Link>
         <Link to='/vibematch'>
           <h1 className='font-bold -ml-60'>Vibe Match</h1>
         </Link>
