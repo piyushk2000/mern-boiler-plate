@@ -40,7 +40,7 @@ export default function OAuth() {
   return (
     <>
       {isLoading ? (
-        <div className=" items-center h-screen">
+        <div className="flex justify-center h-screen">
           <CircularProgress />
         </div>
       ) : (
