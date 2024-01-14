@@ -20,11 +20,12 @@ export default function App() {
         <Route path='/about' element={<About />} />
         <Route path='/sign-in' element={<SignIn />} />
         <Route path='/sign-up' element={<SignUp />} />
-        <Route path="/anime/:id" element={<AnimeDetails />} />
-        <Route path="/vibematch" element={<VibeMatch />} />
-        <Route path="/myvibe" element={<MyVibe />} />
+
         <Route element={<PrivateRoute />}>
           <Route path='/profile' element={<Profile />} />
+          <Route path="/anime/:id" element={<AnimeDetails />} />
+          <Route path="/vibematch" element={<VibeMatch />} />
+          <Route path="/myvibe" element={<MyVibe />} />
         </Route>
       </Routes>
     </BrowserRouter>

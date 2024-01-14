@@ -11,6 +11,7 @@ import FormControl from '@mui/material/FormControl';
 import InputLabel from '@mui/material/InputLabel';
 import Button from '@mui/material/Button';
 import Box from '@mui/material/Box';
+import CircularProgress from '@mui/material/CircularProgress';
 
 const Home = () => {
   const [data, setData] = useState([]);
@@ -19,6 +20,7 @@ const Home = () => {
   const [currentPage, setCurrentPage] = useState(parseInt(sessionStorage.getItem('pageNumber')) || 1);
   const [searchTerm, setSearchTerm] = useState('');
   const [sortOption, setSortOption] = useState('ranked');
+  const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
     setTotalPage(currentPage + 9);
@@ -26,6 +28,7 @@ const Home = () => {
 
   const fetchData = async () => {
     try {
+      setIsLoading(true);
       const response = await axios.get(`https://shikimori.one/api/animes`, {
         params: {
           page: currentPage,
@@ -37,12 +40,14 @@ const Home = () => {
       setData(response.data);
     } catch (error) {
       console.error('Error fetching data:', error);
+    }finally {
+      setIsLoading(false);
     }
   };
 
-  useEffect(()=>{
+  useEffect(() => {
     fetchData()
-  },[currentPage,sortOption])
+  }, [currentPage, sortOption])
 
   const handlePageChange = (event, value) => {
     setCurrentPage(value);
@@ -61,9 +66,19 @@ const Home = () => {
     fetchData();
   };
 
+
+  if (isLoading) {
+    return (
+      <div className="flex justify-center items-center h-screen">
+        <CircularProgress />
+      </div>
+    );
+  }
+
+
   return (
     <>
-      <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', marginBottom: 2 , mt:2 }}>
+      <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', marginBottom: 2, mt: 2 }}>
         <TextField
           label="Search"
           variant="outlined"
@@ -79,7 +94,7 @@ const Home = () => {
             value={sortOption}
             label="Sort By"
             onChange={handleSortChange}
-            sx={{width:100}}
+            sx={{ width: 100 }}
           >
             {/* Add your sorting options here */}
             <MenuItem value="ranked">Ranked</MenuItem>
@@ -99,7 +114,7 @@ const Home = () => {
           </Grid>
         ))}
       </Grid>
-      <Box sx={{ display: 'flex', justifyContent: 'center', marginTop: 2 , mb:2 }}>
+      <Box sx={{ display: 'flex', justifyContent: 'center', marginTop: 2, mb: 2 }}>
         <Pagination
           count={totalPage}
           page={currentPage}
