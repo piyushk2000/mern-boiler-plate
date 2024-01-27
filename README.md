@@ -1,6 +1,6 @@
-# VibeVault: Your Personalized Media Matchmaker!
+# Introducing VibeVault: Your Personalized Media Matchmaker!
 
-**VibeVault**, my personal innovation, is an exciting app designed as a versatile hub for media enthusiasts. It spans books, movies, anime, and more, going beyond Anilist. Although still in development, we've got a functional prototype ready to showcase.
+**VibeVault**, brought to life by me (piyushk2000), is an exciting app designed as a versatile hub for media enthusiasts. Going beyond Anilist, it spans books, movies, anime, and more. Although still in development, we've got a functional prototype ready to showcase.
 
 ## Key Features:
 
