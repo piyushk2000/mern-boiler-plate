@@ -29,7 +29,7 @@ In each folder, run `npm install` to bring in the necessary magic.
 Now that you're all set, use npm run dev in both the "client" and "api" folders to unleash VibeVault!
 
 
-hi this is piyush
+hi this is jagriti
 ### Legacy Peer Dependency Installation:
 
 To ensure compatibility, execute `npm install --legacy-peer-deps` in both folders.
